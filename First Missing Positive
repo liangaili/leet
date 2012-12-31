@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int firstMissingPositive(int A[], int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        int x = 0;
+        bool nfound=false;
+        for (int i=0; i<n; i++) {
+            if (A[i] == n) {
+                nfound = true;
+                break;
+            }
+        }
+        for (int i=0; i<n; i++) {
+            if (A[i] > 0) {
+                x = A[i];
+                break;
+            }
+        }
+        if (x==0) {
+            return 1;
+        }
+        for (int i=0; i<n; i++) {
+            if (A[i]<=0) {
+                A[i] = x;
+            }
+        }
+        for (int i=0; i<n; i++) {
+            if (abs(A[i])<n && A[abs(A[i])]>0) {
+                A[abs(A[i])] = -A[abs(A[i])];
+            }
+        }
+        for (int i=1; i<n; i++) {
+            if (A[i]>0) {
+                return i;
+            }
+        }
+        return n+nfound;
+    }
+};
