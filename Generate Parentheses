@@ -1,0 +1,25 @@
+class Solution {
+private:
+    vector<string> ret;
+    void recursive(string curr, int left, int right, int n) {
+        if (curr.length()==n*2) {
+            ret.push_back(curr);
+            return;
+        }
+        if (left>0) {
+            recursive(curr+"(", left-1, right, n);
+        }
+        
+        if (curr.length()>0 && right>left) {
+            recursive(curr+")", left, right - 1, n);
+        }
+    }
+public:
+    vector<string> generateParenthesis(int n) {
+        // Start typing your C/C++ solution below
+        // DO NOT write int main() function
+        ret.clear();
+        recursive("", n, n, n);
+        return ret;
+    }
+};
